@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    image: java:8
+    build:
+      context: .
+      args:
+         JAR_FILE: ./target/spring-docker-1.0-SNAPSHOT.jar
+    container_name: app
+    volumes:
+      - "./target:/project"
+    ports:
+      - 8080:8080
+    entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","project/spring-docker-1.0-SNAPSHOT.jar"]
