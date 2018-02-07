@@ -61,6 +61,82 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>DEV-MY</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>ru.lagoshny</groupId>
+                        <artifactId>docker-java-maven-plugin</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                        <executions>
+                            <execution>
+                                <id>up</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>up</goal>
+                                </goals>
+                                <configuration>
+                                    <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                                    <appName>${project.build.finalName}.jar</appName>
+                                    <containerName>${project.build.finalName}</containerName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>down</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>down</goal>
+                                </goals>
+                                <configuration>
+                                    <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>DEV-MY-2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>ru.lagoshny</groupId>
+                        <artifactId>docker-java-maven-plugin</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                        <executions>
+                            <execution>
+                                <id>start</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                                <configuration>
+                                    <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                                    <appName>${project.build.finalName}.jar</appName>
+                                    <containerName>app</containerName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>stop</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                                <configuration>
+                                    <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                                    <appName>${project.build.finalName}.jar</appName>
+                                    <containerName>app</containerName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
     <build>
