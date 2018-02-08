@@ -13,6 +13,8 @@ services:
     image: lagoshny/ubuntu-oracle-java-8
     ports:
     - 8081:8080
+    stdin_open: true
+    tty: true
     volumes:
     - /home/ilya/Projects/springdocker/runnable-all/first-app/target:/project
   second-app:
@@ -29,6 +31,8 @@ services:
     image: lagoshny/ubuntu-oracle-java-8
     ports:
     - 8082:8080
+    stdin_open: true
+    tty: true
     volumes:
     - /home/ilya/Projects/springdocker/runnable-all/second-app/target:/project
 version: '3'
