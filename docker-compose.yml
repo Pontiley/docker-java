@@ -10,7 +10,7 @@ services:
     - -Djava.security.egd=file:/dev/./urandom
     - -jar
     - project/spring-docker-1.0-SNAPSHOT.jar
-    image: java:8
+    image: lagoshny/ubuntu-oracle-java-8
     ports:
     - 8080:8080
     volumes:
