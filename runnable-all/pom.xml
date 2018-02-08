@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>spring-docker</artifactId>
+        <groupId>sber.invest</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>first-app</module>
+        <module>second-app</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
+    <artifactId>runnable-all</artifactId>
+
+    <properties>
+        <docker.build.skip>true</docker.build.skip>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>DOCKER</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <configuration>
+                            <skip>${docker.build.skip}</skip>
+                        </configuration>
+                        <groupId>ru.lagoshny</groupId>
+                        <artifactId>docker-java-maven-plugin</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                        <executions>
+                            <execution>
+                                <id>stop</id>
+                                <phase>pre-clean</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                                <configuration>
+                                    <projectDir>${project.basedir}</projectDir>
+                                    <composeFile>${project.parent.parent.basedir}/docker-compose.yml</composeFile>
+                                    <appName>${project.build.finalName}.jar</appName>
+                                    <containerName>${project.artifactId}</containerName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>up</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>up</goal>
+                                </goals>
+                                <configuration>
+                                    <projectDir>${project.basedir}</projectDir>
+                                    <composeFile>${project.parent.parent.basedir}/docker-compose.yml</composeFile>
+                                    <appName>${project.build.finalName}.jar</appName>
+                                    <containerName>${project.artifactId}</containerName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

@@ -1,4 +1,4 @@
-package root;
+package controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  */
 @RestController
-public class TestController {
+public class SimpleController {
 
-    @RequestMapping("/")
+    @RequestMapping("/second")
     public String hello() {
-        return "HELLo1";
+        return "I'm a second app!";
     }
 
-    @RequestMapping("/test")
-    public String goodbye() {
-        return "BYE BYE";
-    }
 }

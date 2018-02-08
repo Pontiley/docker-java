@@ -1,4 +1,4 @@
-package root;
+package controllers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0
  */
 @SpringBootApplication
-public class TestBoot {
+public class FirstAppBoot {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestBoot.class, args);
+        SpringApplication.run(FirstAppBoot.class, args);
     }
 
 }
