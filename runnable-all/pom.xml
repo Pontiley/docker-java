@@ -26,12 +26,15 @@
 
     <profiles>
         <profile>
-            <id>DOCKER</id>
+            <id>DOCKER-BUILD</id>
             <build>
                 <plugins>
                     <plugin>
                         <configuration>
                             <skip>${docker.build.skip}</skip>
+                            <projectDir>${project.basedir}</projectDir>
+                            <appName>${project.build.finalName}.jar</appName>
+                            <containerName>${project.artifactId}</containerName>
                         </configuration>
                         <groupId>ru.lagoshny</groupId>
                         <artifactId>docker-java-maven-plugin</artifactId>
@@ -43,12 +46,6 @@
                                 <goals>
                                     <goal>stop</goal>
                                 </goals>
-                                <configuration>
-                                    <projectDir>${project.basedir}</projectDir>
-                                    <composeFile>${project.parent.parent.basedir}/docker-compose.yml</composeFile>
-                                    <appName>${project.build.finalName}.jar</appName>
-                                    <containerName>${project.artifactId}</containerName>
-                                </configuration>
                             </execution>
                             <execution>
                                 <id>up</id>
@@ -57,10 +54,8 @@
                                     <goal>up</goal>
                                 </goals>
                                 <configuration>
-                                    <projectDir>${project.basedir}</projectDir>
-                                    <composeFile>${project.parent.parent.basedir}/docker-compose.yml</composeFile>
-                                    <appName>${project.build.finalName}.jar</appName>
-                                    <containerName>${project.artifactId}</containerName>
+                                    <needBuild>true</needBuild>
+                                    <detachedMode>true</detachedMode>
                                 </configuration>
                             </execution>
                         </executions>
